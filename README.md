@@ -4,7 +4,20 @@ For Python 3.6+.
 This is a [wireworld](https://en.wikipedia.org/wiki/Wireworld) simulator with hooks to send messages via a variety of protocols (to be implemented- currently it just dumps output to the console). The idea is that it will run as a controller for audio systems, allowing you to program complex triggers via Wireworld automata.
 
 ## Use
-Right now, all the key data is stored in `test_model.txt`. Nothing takes any parameters, so simply run `python -m wireworld`, and it will render a test animation while printing out when the single sink gets triggered.
+```
+usage: Wireworld Composer [-h] [--windowsize WINDOWSIZE] config
+
+Compose sequences using wireworld simulations. Check the readme for details.
+
+positional arguments:
+  config                path to the config file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --windowsize WINDOWSIZE
+                        Resolution of the output animation, defaults to 512
+                        pixels
+```
 
 ### File Format
 The TXT file format has two sections: a JSON snipped which configures
