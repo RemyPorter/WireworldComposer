@@ -11,11 +11,11 @@ NEIGHBORHOOD = (
 )
 XS,YS = NEIGHBORHOOD
 
-def fire_sink(value):
+def fire_sink(x, y, sink, electrons, sender):
     """Output that a sink was triggered"""
-    print(f"Sink {chr(value)}")
+    sender.send(sink,x,y,electrons)
 
-def check_sinks(field):
+def check_sinks(field, sender):
     """
     Check every sink to see if it has electrons as neighbors
     """
@@ -26,7 +26,7 @@ def check_sinks(field):
         neighbors = field[xq,yq]
         conds = np.where(neighbors == H)
         if (len(conds[0]) > 0):
-            fire_sink(field[x,y])
+            fire_sink(x, y, field[x,y], len(conds[0]), sender)
 
 def check_conductors(field, pairs):
     """
@@ -46,12 +46,12 @@ def check_conductors(field, pairs):
     field[nx,ny] = H
         
 
-def tick(field):
+def tick(field, sender):
     """Apply the wireworld state"""
     heads = np.where(field == H)
     tails = np.where(field == T)
     conductors = np.where(field == C)
-    check_sinks(field)
+    check_sinks(field, sender)
     check_conductors(field, conductors)
     field[heads] = T
     field[tails] = C

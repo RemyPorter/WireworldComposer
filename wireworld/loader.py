@@ -1,7 +1,7 @@
 """Parse and load the config document"""
 import json
 from pydantic import BaseModel
-from typing import List, Dict
+from typing import List, Dict, Union
 import numpy as np
 from . import H, C, T, E
 
@@ -21,11 +21,20 @@ def load_file(file):
             world.append(l)
     return "".join(data), "".join(world)
 
+class OscConfig(BaseModel):
+    host:str = "localhost"
+    port:int = 8481
+    addr:str = "/wireworld"
+
+class PrintConfig(BaseModel):
+    debug:bool = True
+
 class Config(BaseModel):
     size:int
     divisions:int
     palette:List[str]
     sinks:Dict[str,str]={}
+    osc:Union[OscConfig, PrintConfig] = PrintConfig()
 
 def parse_ascii(config, ascii):
     field = np.full((config.size, config.size), E)

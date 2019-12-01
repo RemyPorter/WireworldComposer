@@ -9,6 +9,11 @@
     ],
     "sinks": {
         "0": "#00FF00"
+    },
+    "osc": {
+        "host": "localhost",
+        "port": 8481,
+        "addr": "/wireworld"
     }
 }
 ---
