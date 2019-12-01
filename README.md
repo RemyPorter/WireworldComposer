@@ -27,7 +27,7 @@ key elements of the environment, and an ASCII art block describing the wireworld
 * Size: how many cells square the simulation should be
 * palette: should contain 4 entries, which are the colors for Empty, Head, Tail, and Conductor cells in order. Hex colors.
 * sinks: a dictionary mapping a character to a color. The keys should all be one character in size, and should be an ASCII character. They should not be one of the characters reserved for ASCII art, they should not be a weird control character. This color will be used to draw the sinks in the simulation.
-* osc: map the output. Either use a single boolean key, `debug` (its value doesn't matter, but should probably be `true` just for sanity), or supply a host/port and OSC addr (with the leading `/`)
+* osc: map the output. Either use a single boolean key, `debug` (its value doesn't matter, but should probably be `true` just for sanity), or supply a `host`/`port` and OSC `addr` (with the leading `/`)
 * tempo: supply a `bpm` and a number of `subdivisions`. This controls the timing/framerate
 
 #### ASCII Art Section
@@ -39,4 +39,9 @@ The ASCII art language works thus:
 * Electron Heads: either `<` or `>`
 * Electron tails: `~`
 * Empty cells: ` `
-* Sinks: any ASCII character with an ordinal greater than 3, e.g. don't use weird control characters.
+* Sinks: any ASCII character with an ordinal greater than 3, e.g. don't use weird control characters. NB: the same sink can appear multiple times in the diagram. They are effectively the same sink, and any OSC messages they trigger go to the same place.
+
+## OSC Output
+The `addr` property of the OSC output is the base address to which all OSC messages will be sent. The default address is `/wireworld`. This is the *base address*. Each sink will have its own address. As you add a sink to the ASCII art diagram, they will each have their own sub-address based on their character, e.g., the sink `c` will send data to `/wireworld/c`.
+
+The content of the message will be the `[x, y, count]`- the x/y coordinates of the sink and the number of electrons that were triggering the message.

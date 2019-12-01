@@ -21,7 +21,8 @@ class OSCSink(Thread):
     def run(self):
         while True:
             msg = self.queue.get()
-            self.sender.send_message(self.addr, msg)
+            addr = self.addr + "/" + msg[0]
+            self.sender.send_message(addr, msg[1:])
 
 class PrintSender(Thread):
     """Sender Thread to Sink messages"""
