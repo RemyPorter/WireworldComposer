@@ -1,4 +1,6 @@
 # Wireworld Composer
+For Python 3.6+.
+
 This is a [wireworld](https://en.wikipedia.org/wiki/Wireworld) simulator with hooks to send messages via a variety of protocols (to be implemented- currently it just dumps output to the console). The idea is that it will run as a controller for audio systems, allowing you to program complex triggers via Wireworld automata.
 
 ## Use
