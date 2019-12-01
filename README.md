@@ -6,9 +6,17 @@ Right now, all the key data is stored in `test_model.txt`. Nothing takes any par
 
 ### File Format
 The TXT file format has two sections: a JSON snipped which configures
-key elements of the environment: the divisions (how many updates per second), the size of the playfield, the colors to be used to handle the wireworld cell types (the palette), and the colors used to handle the sinks you're using (the sinks). Sinks should be a single character.
+key elements of the environment, and an ASCII art block describing the wireworld.
 
-A separator line (starting with `-`) marks the end of this block. The following block is the wireworld simulation we want to run as ASCII art. I recommend using [AsciiFlow](http://asciiflow.com/) to draw it.
+#### JSON Section
+* Size: how many cells square the simulation should be
+* palette: should contain 4 entries, which are the colors for Empty, Head, Tail, and Conductor cells in order. Hex colors.
+* sinks: a dictionary mapping a character to a color. The keys should all be one character in size, and should be an ASCII character. They should not be one of the characters reserved for ASCII art, they should not be a weird control character. This color will be used to draw the sinks in the simulation.
+* osc: map the output. Either use a single boolean key, `debug` (its value doesn't matter, but should probably be `true` just for sanity), or supply a host/port and OSC addr (with the leading `/`)
+* tempo: supply a `bpm` and a number of `subdivisions`. This controls the timing/framerate
+
+#### ASCII Art Section
+A separator line (starting with `-`) marks the end of the JSON block. The following block is the wireworld simulation we want to run as ASCII art. I recommend using [AsciiFlow](http://asciiflow.com/) to draw it.
 
 The ASCII art language works thus:
 

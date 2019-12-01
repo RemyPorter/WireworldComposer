@@ -19,7 +19,7 @@ output.start()
 
 field = parse_ascii(config, world)
 
-step = int((1. / config.divisions) * 1000)
+step = int((60. / (config.tempo.bpm * config.tempo.subdivisions)) * 1000)
 
 while True:
     show(colorize(config, field))

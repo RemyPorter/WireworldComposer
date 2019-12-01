@@ -29,11 +29,15 @@ class OscConfig(BaseModel):
 class PrintConfig(BaseModel):
     debug:bool = True
 
+class Timing(BaseModel):
+    bpm:int=120
+    subdivisions:int=16
+
 class Config(BaseModel):
     size:int
-    divisions:int
     palette:List[str]
     sinks:Dict[str,str]={}
+    tempo:Timing=Timing()
     osc:Union[OscConfig, PrintConfig] = PrintConfig()
 
 def parse_ascii(config, ascii):
